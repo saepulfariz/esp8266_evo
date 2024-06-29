@@ -243,6 +243,9 @@ String SendHTML(){
   ptr +=".button-off {background-color: #34495e;}\n";
   ptr +=".button-off:active {background-color: #2c3e50;}\n";
   ptr +="p {font-size: 14px;color: #888;margin-bottom: 10px;}\n";
+  ptr += ".flex-container {display: flex;flex-wrap: wrap;justify-content: center;}\n";
+  ptr += ".flex-container>div {flex: 20%; margin: 10px;text-align: center;font-size: 30px;}\n";
+  ptr += "@media (max-width: 800px) {.flex-container>div {flex: 25%;}}\n";
   ptr +="</style>\n";
   ptr +="</head>\n";
   ptr +="<body>\n";
@@ -255,6 +258,8 @@ String SendHTML(){
     ptr +="<p>LED Status: OFF</p><a class=\"button button-on\" href=\"/led/on\">ON</a>\n";
   }
 
+  ptr +="<div class='flex-container'>\n";
+  ptr +="<div>\n";
   if(digitalRead(d1) == LOW)
   {
     ptr +="<p>D1 Status: ON</p><a class=\"button button-off\" href=\"/d1/off\">OFF</a>\n";
@@ -262,12 +267,19 @@ String SendHTML(){
     ptr +="<p>D1 Status: OFF</p><a class=\"button button-on\" href=\"/d1/on\">ON</a>\n";
   }
 
+  ptr +="</div>\n";
+
+  ptr +="<div>\n";
   if(digitalRead(d2) == LOW)
   {
     ptr +="<p>D2 Status: ON</p><a class=\"button button-off\" href=\"/d2/off\">OFF</a>\n";
   }else{
     ptr +="<p>D2 Status: OFF</p><a class=\"button button-on\" href=\"/d2/on\">ON</a>\n";
   }
+
+  ptr +="</div>\n";
+
+  ptr +="<div>\n";
 
   if(digitalRead(d3) == LOW)
   {
@@ -276,6 +288,10 @@ String SendHTML(){
     ptr +="<p>D3 Status: OFF</p><a class=\"button button-on\" href=\"/d3/on\">ON</a>\n";
   }
 
+  ptr +="</div>\n";
+
+  ptr +="<div>\n";
+
   if(digitalRead(d4) == LOW)
   {
     ptr +="<p>D4 Status: ON</p><a class=\"button button-off\" href=\"/d4/off\">OFF</a>\n";
@@ -283,12 +299,24 @@ String SendHTML(){
     ptr +="<p>D4 Status: OFF</p><a class=\"button button-on\" href=\"/d4/on\">ON</a>\n";
   }
 
+  ptr +="</div>\n";
+
+  ptr +="</div>\n"; // end flex-container
+
+  ptr +="<div class='flex-container'>\n";
+
+
+  ptr +="<div>\n";
   if(digitalRead(d5) == LOW)
   {
     ptr +="<p>D5 Status: ON</p><a class=\"button button-off\" href=\"/d5/off\">OFF</a>\n";
   }else{
     ptr +="<p>D5 Status: OFF</p><a class=\"button button-on\" href=\"/d5/on\">ON</a>\n";
   }
+
+  ptr +="</div>\n";
+
+  ptr +="<div>\n";
 
   if(digitalRead(d6) == LOW)
   {
@@ -297,6 +325,10 @@ String SendHTML(){
     ptr +="<p>D6 Status: OFF</p><a class=\"button button-on\" href=\"/d6/on\">ON</a>\n";
   }
 
+  ptr +="</div>\n";
+
+  ptr +="<div>\n";
+
   if(digitalRead(d7) == LOW)
   {
     ptr +="<p>D7 Status: ON</p><a class=\"button button-off\" href=\"/d7/off\">OFF</a>\n";
@@ -304,12 +336,20 @@ String SendHTML(){
     ptr +="<p>D7 Status: OFF</p><a class=\"button button-on\" href=\"/d7/on\">ON</a>\n";
   }
 
+  ptr +="</div>\n";
+
+  ptr +="<div>\n";
+
   if(digitalRead(d8) == LOW)
   {
     ptr +="<p>D8 Status: ON</p><a class=\"button button-off\" href=\"/d8/off\">OFF</a>\n";
   }else{
     ptr +="<p>D8 Status: OFF</p><a class=\"button button-on\" href=\"/d8/on\">ON</a>\n";
   }
+
+  ptr +="</div>\n";
+
+   ptr +="</div>\n"; // end flex-container
 
   ptr +="</body>\n";
   ptr +="</html>\n";
