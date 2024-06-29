@@ -40,7 +40,7 @@ void handleNotFound() {
 void setup() {
   // put your setup code here, to run once:
   
-	
+  
   // Inisialisasi PIN lampu 
   pinMode(LED_BUILTIN, OUTPUT);  // Initialize the LED_BUILTIN pin as an output
   
@@ -118,6 +118,86 @@ void setup() {
         server->send(200, "text/html", SendHTML());
       });
 
+      server->on("/d1/on", []() {
+        digitalWrite(d1, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d1/off", []() {
+        digitalWrite(d1, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d2/on", []() {
+        digitalWrite(d2, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d2/off", []() {
+        digitalWrite(d2, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d3/on", []() {
+        digitalWrite(d3, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d3/off", []() {
+        digitalWrite(d3, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d4/on", []() {
+        digitalWrite(d4, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d4/off", []() {
+        digitalWrite(d4, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d5/on", []() {
+        digitalWrite(d5, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d5/off", []() {
+        digitalWrite(d5, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d6/on", []() {
+        digitalWrite(d6, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d6/off", []() {
+        digitalWrite(d6, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d7/on", []() {
+        digitalWrite(d7, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d7/off", []() {
+        digitalWrite(d7, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d8/on", []() {
+        digitalWrite(d8, LOW);
+        server->send(200, "text/html", SendHTML());
+      });
+
+      server->on("/d8/off", []() {
+        digitalWrite(d8, HIGH);
+        server->send(200, "text/html", SendHTML());
+      });
+
 
       server->on("/reset", []() {
         Serial.println("WiFi settings reset");
@@ -139,13 +219,14 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  /*
   if (digitalRead(flashButtonPin) == LOW) {
     WiFiManager wm;
     wm.resetSettings();
     ESP.reset();
     Serial.println("WiFi settings reset");
     delay(1000); 
-  }
+  }*/
   
   server->handleClient();
 }
@@ -172,6 +253,62 @@ String SendHTML(){
     ptr +="<p>LED Status: ON</p><a class=\"button button-off\" href=\"/led/off\">OFF</a>\n";
   }else{
     ptr +="<p>LED Status: OFF</p><a class=\"button button-on\" href=\"/led/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d1) == LOW)
+  {
+    ptr +="<p>D1 Status: ON</p><a class=\"button button-off\" href=\"/d1/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D1 Status: OFF</p><a class=\"button button-on\" href=\"/d1/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d2) == LOW)
+  {
+    ptr +="<p>D2 Status: ON</p><a class=\"button button-off\" href=\"/d2/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D2 Status: OFF</p><a class=\"button button-on\" href=\"/d2/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d3) == LOW)
+  {
+    ptr +="<p>D3 Status: ON</p><a class=\"button button-off\" href=\"/d3/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D3 Status: OFF</p><a class=\"button button-on\" href=\"/d3/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d4) == LOW)
+  {
+    ptr +="<p>D4 Status: ON</p><a class=\"button button-off\" href=\"/d4/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D4 Status: OFF</p><a class=\"button button-on\" href=\"/d4/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d5) == LOW)
+  {
+    ptr +="<p>D5 Status: ON</p><a class=\"button button-off\" href=\"/d5/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D5 Status: OFF</p><a class=\"button button-on\" href=\"/d5/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d6) == LOW)
+  {
+    ptr +="<p>D6 Status: ON</p><a class=\"button button-off\" href=\"/d6/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D6 Status: OFF</p><a class=\"button button-on\" href=\"/d6/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d7) == LOW)
+  {
+    ptr +="<p>D7 Status: ON</p><a class=\"button button-off\" href=\"/d7/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D7 Status: OFF</p><a class=\"button button-on\" href=\"/d7/on\">ON</a>\n";
+  }
+
+  if(digitalRead(d8) == LOW)
+  {
+    ptr +="<p>D8 Status: ON</p><a class=\"button button-off\" href=\"/d8/off\">OFF</a>\n";
+  }else{
+    ptr +="<p>D8 Status: OFF</p><a class=\"button button-on\" href=\"/d8/on\">ON</a>\n";
   }
 
   ptr +="</body>\n";
