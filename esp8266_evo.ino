@@ -9,6 +9,15 @@ std::unique_ptr<ESP8266WebServer> server;
 
 const int flashButtonPin = 0;
 
+#define d1 D1
+#define d2 D2
+#define d3 D3
+#define d4 D4
+#define d5 D5
+#define d6 D6
+#define d7 D7
+#define d8 D8
+
 void handleRoot() {
   server->send(200, "text/plain", "hello from esp8266!");
 }
@@ -34,6 +43,30 @@ void setup() {
 	
   // Inisialisasi PIN lampu 
   pinMode(LED_BUILTIN, OUTPUT);  // Initialize the LED_BUILTIN pin as an output
+  
+  pinMode(d1, OUTPUT);
+  digitalWrite(d1, LOW);
+
+  pinMode(d2, OUTPUT);
+  digitalWrite(d2, LOW);
+
+  pinMode(d3, OUTPUT);
+  digitalWrite(d3, LOW);
+  
+  pinMode(d4, OUTPUT);
+  digitalWrite(d4, LOW);
+  
+  pinMode(d5, OUTPUT);
+  digitalWrite(d5, LOW);
+  
+  pinMode(d6, OUTPUT);
+  digitalWrite(d6, LOW);
+  
+  pinMode(d7, OUTPUT);
+  digitalWrite(d7, LOW);
+  
+  pinMode(d8, OUTPUT);
+  digitalWrite(d8, LOW);
   
   Serial.begin(115200);
   //Serial.setDebugOutput(true);
