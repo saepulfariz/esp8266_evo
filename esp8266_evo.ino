@@ -199,6 +199,63 @@ void setup() {
       });
 
 
+      server->on("/api/status", []() {
+        
+        String json = "{";
+
+        if(digitalRead(d1) == LOW){
+          json += "\"1\" : 1,";
+        }else{
+          json += "\"1\" : 0,";
+        }
+
+        if(digitalRead(d2) == LOW){
+          json += "\"2\" : 1,";
+        }else{
+          json += "\"2\" : 0,";
+        }
+
+        if(digitalRead(d3) == LOW){
+          json += "\"3\" : 1,";
+        }else{
+          json += "\"3\" : 0,";
+        }
+
+        if(digitalRead(d4) == LOW){
+          json += "\"4\" : 1,";
+        }else{
+          json += "\"4\" : 0,";
+        }
+
+        if(digitalRead(d5) == LOW){
+          json += "\"5\" : 1,";
+        }else{
+          json += "\"5\" : 0,";
+        }
+
+        if(digitalRead(d6) == LOW){
+          json += "\"6\" : 1,";
+        }else{
+          json += "\"6\" : 0,";
+        }
+
+        if(digitalRead(d7) == LOW){
+          json += "\"7\" : 1,";
+        }else{
+          json += "\"7\" : 0,";
+        }
+
+        if(digitalRead(d8) == LOW){
+          json += "\"8\" : 1";
+        }else{
+          json += "\"8\" : 0";
+        }
+
+        json += "}";
+        server->send(200, "text/plain", json);
+      });
+
+
       server->on("/reset", []() {
         Serial.println("WiFi settings reset");
         server->send(200, "text/plain", "WiFi settings reset, reconnect wifi");
