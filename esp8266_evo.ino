@@ -134,7 +134,7 @@ String SendHTML(){
   ptr +="<body>\n";
   ptr +="<h1>ESP8266 Web Server</h1>\n";
   
-  if(digitalRead(LED_BUILTIN) == HIGH)
+  if(digitalRead(LED_BUILTIN) == LOW)
   {
     ptr +="<p>LED Status: ON</p><a class=\"button button-off\" href=\"/led/off\">OFF</a>\n";
   }else{
