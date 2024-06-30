@@ -198,6 +198,49 @@ void setup() {
         server->send(200, "text/html", SendHTML());
       });
 
+      // server->on("/api/lamps/{id}", handleLamp);
+
+      server->on("/api/lamps/d1", []() {
+        handleLamp("D1");
+      });
+
+      server->on("/api/lamps/d2", []() {
+        handleLamp("D2");
+      });
+
+      server->on("/api/lamps/d3", []() {
+        handleLamp("D3");
+      });
+
+      server->on("/api/lamps/d4", []() {
+        handleLamp("D4");
+      });
+
+      server->on("/api/lamps/d5", []() {
+        handleLamp("D5");
+      });
+
+      server->on("/api/lamps/d6", []() {
+        handleLamp("D6");
+      });
+
+      server->on("/api/lamps/d7", []() {
+        handleLamp("D7");
+      });
+
+      server->on("/api/lamps/d8", []() {
+        handleLamp("D8");
+      });
+
+      // Error
+      // server->on("/api/lamps/d1", handleLamp("D1"));
+      // server->on("/api/lamps/d2", handleLamp("D2"));
+      // server->on("/api/lamps/d3", handleLamp("D3"));
+      // server->on("/api/lamps/d4", handleLamp("D4"));
+      // server->on("/api/lamps/d5", handleLamp("D5"));
+      // server->on("/api/lamps/d6", handleLamp("D6"));
+      // server->on("/api/lamps/d7", handleLamp("D7"));
+      // server->on("/api/lamps/d8", handleLamp("D8"));
 
       server->on("/api/status", []() {
         
@@ -272,6 +315,61 @@ void setup() {
   }
   
  
+}
+
+int getPinNumber(String pinName) {
+  if (pinName == "D0") return D0;
+  if (pinName == "D1") return D1;
+  if (pinName == "D2") return D2;
+  if (pinName == "D3") return D3;
+  if (pinName == "D4") return D4;
+  if (pinName == "D5") return D5;
+  if (pinName == "D6") return D6;
+  if (pinName == "D7") return D7;
+  if (pinName == "D8") return D8;
+  return -1; // Invalid pin
+}
+
+void handleLamp(String lampId) {
+  // Get the value of {id} parameter
+  // String lampId = server->arg("id");
+
+  // Convert lampId to pin number
+  int pinNumber = getPinNumber(lampId);
+
+  String json = "{";
+
+  if(digitalRead(pinNumber) == LOW){
+    digitalWrite(pinNumber, HIGH);
+  }else{
+    digitalWrite(pinNumber, LOW);
+  }
+
+  if (pinNumber != -1) {
+    json += "\"success\" : true,";
+    json += "\"message\" : true,";
+    if(digitalRead(pinNumber) == LOW){
+      json += "\"message\" : \"Status ON\",";
+    }else{
+      json += "\"message\" : \"Status OFF\",";
+    }
+    json += "\"data\" : {";
+    json += "\"id\" : \""+lampId+"\",";
+    if(digitalRead(pinNumber) == LOW){
+      json += "\"status\" : 1";
+    }else{
+      json += "\"status\" : 0";
+    }
+    json += "}";
+    json += "}";
+  }else{
+    json += "\"success\" : false,";
+    json += "\"message\" : \"Invalid ID\",";
+    json += "\"data\" : {}";
+    json += "}";
+  }
+  server->send(200, "text/plain", json);
+
 }
 
 void loop() {
