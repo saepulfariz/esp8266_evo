@@ -198,38 +198,122 @@ void setup() {
         server->send(200, "text/html", SendHTML());
       });
 
+      server->on("/api/lamps", []() {
+        
+        String json = "{";
+
+        json += "\"success\" : true,";
+        json += "\"message\" : \"List Data Lamps \",";
+        json += "\"data\" : [";
+
+        json += "{";
+        json += "\"id\" : \"1\",";
+        if(digitalRead(d1) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "},";
+
+        json += "{";
+        json += "\"id\" : \"2\",";
+        if(digitalRead(d2) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "},";
+
+        json += "{";
+        json += "\"id\" : \"3\",";
+        if(digitalRead(d3) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "},";
+
+        json += "{";
+        json += "\"id\" : \"4\",";
+        if(digitalRead(d4) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "},";
+
+        json += "{";
+        json += "\"id\" : \"5\",";
+        if(digitalRead(d5) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "},";
+
+        json += "{";
+        json += "\"id\" : \"6\",";
+        if(digitalRead(d6) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "},";
+
+        json += "{";
+        json += "\"id\" : \"7\",";
+        if(digitalRead(d7) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "},";
+
+        json += "{";
+        json += "\"id\" : \"8\",";
+        if(digitalRead(d8) == LOW){
+          json += "\"status\" : 1";
+        }else{
+          json += "\"status\" : 0";
+        }
+        json += "}]";
+
+        json += "}";
+        server->send(200, "text/plain", json);
+      });
+
       // server->on("/api/lamps/{id}", handleLamp);
 
-      server->on("/api/lamps/d1", []() {
-        handleLamp("D1");
+      server->on("/api/lamps/1", []() {
+        handleLamp("1");
       });
 
-      server->on("/api/lamps/d2", []() {
-        handleLamp("D2");
+      server->on("/api/lamps/2", []() {
+        handleLamp("2");
       });
 
-      server->on("/api/lamps/d3", []() {
-        handleLamp("D3");
+      server->on("/api/lamps/3", []() {
+        handleLamp("3");
       });
 
-      server->on("/api/lamps/d4", []() {
-        handleLamp("D4");
+      server->on("/api/lamps/4", []() {
+        handleLamp("4");
       });
 
-      server->on("/api/lamps/d5", []() {
-        handleLamp("D5");
+      server->on("/api/lamps/5", []() {
+        handleLamp("5");
       });
 
-      server->on("/api/lamps/d6", []() {
-        handleLamp("D6");
+      server->on("/api/lamps/6", []() {
+        handleLamp("6");
       });
 
-      server->on("/api/lamps/d7", []() {
-        handleLamp("D7");
+      server->on("/api/lamps/7", []() {
+        handleLamp("7");
       });
 
-      server->on("/api/lamps/d8", []() {
-        handleLamp("D8");
+      server->on("/api/lamps/8", []() {
+        handleLamp("8");
       });
 
       // Error
@@ -318,15 +402,15 @@ void setup() {
 }
 
 int getPinNumber(String pinName) {
-  if (pinName == "D0") return D0;
-  if (pinName == "D1") return D1;
-  if (pinName == "D2") return D2;
-  if (pinName == "D3") return D3;
-  if (pinName == "D4") return D4;
-  if (pinName == "D5") return D5;
-  if (pinName == "D6") return D6;
-  if (pinName == "D7") return D7;
-  if (pinName == "D8") return D8;
+  if (pinName == "0") return D0;
+  if (pinName == "1") return D1;
+  if (pinName == "2") return D2;
+  if (pinName == "3") return D3;
+  if (pinName == "4") return D4;
+  if (pinName == "5") return D5;
+  if (pinName == "6") return D6;
+  if (pinName == "7") return D7;
+  if (pinName == "8") return D8;
   return -1; // Invalid pin
 }
 
@@ -347,7 +431,6 @@ void handleLamp(String lampId) {
 
   if (pinNumber != -1) {
     json += "\"success\" : true,";
-    json += "\"message\" : true,";
     if(digitalRead(pinNumber) == LOW){
       json += "\"message\" : \"Status ON\",";
     }else{
