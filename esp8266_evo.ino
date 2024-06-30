@@ -442,7 +442,7 @@ void handleLamp(String lampId) {
     }
     json += "\"data\" : {";
     json += "\"id\" : \""+lampId+"\",";
-    if(digitalRead(pinNumber) == LOW){
+    if(digitalRead(pinNumber) == HIGH){
       json += "\"status\" : 1";
     }else{
       json += "\"status\" : 0";
@@ -495,18 +495,18 @@ String SendHTML(){
   
   if(digitalRead(LED_BUILTIN) == LOW)
   {
-    ptr +="<p>LED Status: ON</p><a class=\"button button-off\" href=\"/led/off\">OFF</a>\n";
+    ptr +="<p>LED Status: ON</p><a class=\"button button-on\" href=\"/led/off\">ON</a>\n";
   }else{
-    ptr +="<p>LED Status: OFF</p><a class=\"button button-on\" href=\"/led/on\">ON</a>\n";
+    ptr +="<p>LED Status: OFF</p><a class=\"button button-off\" href=\"/led/on\">OFF</a>\n";
   }
 
   ptr +="<div class='flex-container'>\n";
   ptr +="<div>\n";
   if(digitalRead(d1) == LOW)
   {
-    ptr +="<p>D1 Status: ON</p><a class=\"button button-off\" href=\"/d1/off\">OFF</a>\n";
+    ptr +="<p>D1 Status: ON</p><a class=\"button button-on\" href=\"/d1/off\">ON</a>\n";
   }else{
-    ptr +="<p>D1 Status: OFF</p><a class=\"button button-on\" href=\"/d1/on\">ON</a>\n";
+    ptr +="<p>D1 Status: OFF</p><a class=\"button button-off\" href=\"/d1/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
@@ -514,9 +514,9 @@ String SendHTML(){
   ptr +="<div>\n";
   if(digitalRead(d2) == LOW)
   {
-    ptr +="<p>D2 Status: ON</p><a class=\"button button-off\" href=\"/d2/off\">OFF</a>\n";
+    ptr +="<p>D2 Status: ON</p><a class=\"button button-on\" href=\"/d2/off\">ON</a>\n";
   }else{
-    ptr +="<p>D2 Status: OFF</p><a class=\"button button-on\" href=\"/d2/on\">ON</a>\n";
+    ptr +="<p>D2 Status: OFF</p><a class=\"button button-off\" href=\"/d2/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
@@ -525,9 +525,9 @@ String SendHTML(){
 
   if(digitalRead(d3) == LOW)
   {
-    ptr +="<p>D3 Status: ON</p><a class=\"button button-off\" href=\"/d3/off\">OFF</a>\n";
+    ptr +="<p>D3 Status: ON</p><a class=\"button button-on\" href=\"/d3/off\">ON</a>\n";
   }else{
-    ptr +="<p>D3 Status: OFF</p><a class=\"button button-on\" href=\"/d3/on\">ON</a>\n";
+    ptr +="<p>D3 Status: OFF</p><a class=\"button button-off\" href=\"/d3/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
@@ -536,9 +536,9 @@ String SendHTML(){
 
   if(digitalRead(d4) == LOW)
   {
-    ptr +="<p>D4 Status: ON</p><a class=\"button button-off\" href=\"/d4/off\">OFF</a>\n";
+    ptr +="<p>D4 Status: ON</p><a class=\"button button-on\" href=\"/d4/off\">ON</a>\n";
   }else{
-    ptr +="<p>D4 Status: OFF</p><a class=\"button button-on\" href=\"/d4/on\">ON</a>\n";
+    ptr +="<p>D4 Status: OFF</p><a class=\"button button-off\" href=\"/d4/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
@@ -551,9 +551,9 @@ String SendHTML(){
   ptr +="<div>\n";
   if(digitalRead(d5) == LOW)
   {
-    ptr +="<p>D5 Status: ON</p><a class=\"button button-off\" href=\"/d5/off\">OFF</a>\n";
+    ptr +="<p>D5 Status: ON</p><a class=\"button button-on\" href=\"/d5/off\">ON</a>\n";
   }else{
-    ptr +="<p>D5 Status: OFF</p><a class=\"button button-on\" href=\"/d5/on\">ON</a>\n";
+    ptr +="<p>D5 Status: OFF</p><a class=\"button button-off\" href=\"/d5/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
@@ -562,9 +562,9 @@ String SendHTML(){
 
   if(digitalRead(d6) == LOW)
   {
-    ptr +="<p>D6 Status: ON</p><a class=\"button button-off\" href=\"/d6/off\">OFF</a>\n";
+    ptr +="<p>D6 Status: ON</p><a class=\"button button-on\" href=\"/d6/off\">ON</a>\n";
   }else{
-    ptr +="<p>D6 Status: OFF</p><a class=\"button button-on\" href=\"/d6/on\">ON</a>\n";
+    ptr +="<p>D6 Status: OFF</p><a class=\"button button-off\" href=\"/d6/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
@@ -573,9 +573,9 @@ String SendHTML(){
 
   if(digitalRead(d7) == LOW)
   {
-    ptr +="<p>D7 Status: ON</p><a class=\"button button-off\" href=\"/d7/off\">OFF</a>\n";
+    ptr +="<p>D7 Status: ON</p><a class=\"button button-on\" href=\"/d7/off\">ON</a>\n";
   }else{
-    ptr +="<p>D7 Status: OFF</p><a class=\"button button-on\" href=\"/d7/on\">ON</a>\n";
+    ptr +="<p>D7 Status: OFF</p><a class=\"button button-off\" href=\"/d7/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
@@ -584,14 +584,14 @@ String SendHTML(){
 
   if(digitalRead(d8) == LOW)
   {
-    ptr +="<p>D8 Status: ON</p><a class=\"button button-off\" href=\"/d8/off\">OFF</a>\n";
+    ptr +="<p>D8 Status: ON</p><a class=\"button button-on\" href=\"/d8/off\">ON</a>\n";
   }else{
-    ptr +="<p>D8 Status: OFF</p><a class=\"button button-on\" href=\"/d8/on\">ON</a>\n";
+    ptr +="<p>D8 Status: OFF</p><a class=\"button button-off\" href=\"/d8/on\">OFF</a>\n";
   }
 
   ptr +="</div>\n";
 
-   ptr +="</div>\n"; // end flex-container
+  ptr +="</div>\n"; // end flex-container
 
   ptr +="</body>\n";
   ptr +="</html>\n";
