@@ -103,6 +103,10 @@ void setup() {
 
       server.reset(new ESP8266WebServer(WiFi.localIP(), 80));
 
+      // server.sendHeader("Access-Control-Allow-Origin", "*");
+      // server.enableCORS(true);
+      server->enableCORS(true);
+
       server->on("/", []() {
         server->send(200, "text/html", SendHTML()); 
       });
