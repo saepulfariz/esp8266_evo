@@ -90,7 +90,7 @@ void setup() {
 
   bool res;
 
-  res = wifiManager.autoConnect("AutoConnectAP"); // anonymous ap
+  res = wifiManager.autoConnect("saepulfariz-device-lamps"); // anonymous ap
   // res = wifiManager.autoConnect("AutoConnectAP","password"); // password protected ap
 
   if(!res) {
@@ -461,6 +461,8 @@ void handleLamp(String lampId) {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  // kalau pake LOW ketika konek wifi langsung ke reset
+  // kalau pake HIGH ketika ada tombol D3 ke on off ikut ke reset juga
   /*
   if (digitalRead(flashButtonPin) == LOW) {
     WiFiManager wm;
@@ -468,7 +470,8 @@ void loop() {
     ESP.reset();
     Serial.println("WiFi settings reset");
     delay(1000); 
-  }*/
+  }
+  */
   
   server->handleClient();
 }
