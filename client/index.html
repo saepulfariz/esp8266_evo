@@ -1,0 +1,358 @@
+<!-- DEBUG-VIEW START 2 APPPATH\Views\lamps\index.php -->
+<!-- DEBUG-VIEW START 1 APPPATH\Views\layouts\app.php -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home System</title>
+    <link rel="icon" href="smart-house.png" type="image/x-icon">
+    <meta name="csrf-token" content="fdaebf964162362b9c153b037bec9a08">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: lightgray;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .form-switch {
+            display: flex !important;
+            /* flex-direction: row-reverse !important; */
+            justify-content: center !important;
+        }
+
+        .form-switch .form-check-input {
+            width: 4em;
+            height: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <img src="smart-house.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
+                SMART HOME
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item d-none d-lg-block disabled"><span class="nav-link disabled">⋮</span></li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="/"><i class="fa fa-lightbulb"> </i> LAMPU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="/histories"><i class="fa fa-line-chart"> </i> HISTORY</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- data-bs-toggle="modal" data-bs-target="#modalSetApi" -->
+                        <a class="nav-link fw-bold"  id="show_api" href="#"><i class="fa-solid fa-gear"> </i> Set API</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 120px;">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm rounded-2">
+                    <div class="card-header bg-danger text-white" id="headerlamp-3">
+                        <h5 class="mb-0 text-uppercase">Lampu Kamar</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <img src="off.png" class="mt-3" width="80" id="lamp-3">
+                        <div class="mt-4">
+                            <div class="form-check form-switch">
+                                <input onclick="updateLamp(this)" class="form-check-input status-3" type="checkbox"
+                                    role="switch" id="3" bg-danger>
+                                <label class="form-check-label ms-3 mt-1" for="3">
+                                    <h4>
+                                        <span class="@if ($lamp->status == 1) text-success @else text-danger @endif"
+                                            id="lampStatus-3">
+                                            OFF </span>
+                                    </h4>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-body-tertiary justify-content-center border-0 shadow-sm rounded-2 d-none"
+                        id="loader-3">
+                        <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+                        </div>
+                        <div class="mt-2">
+                            <strong>Mohon Tunggu...</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm rounded-2">
+                    <div class="card-header bg-success text-white" id="headerlamp-2">
+                        <h5 class="mb-0 text-uppercase">Lampu Tengah</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <img src="on.png" class="mt-3" width="80" id="lamp-2">
+                        <div class="mt-4">
+                            <div class="form-check form-switch">
+                                <input onclick="updateLamp(this)" class="form-check-input status-2" type="checkbox"
+                                    role="switch" id="2" checked>
+                                <label class="form-check-label ms-3 mt-1" for="2">
+                                    <h4>
+                                        <span class="@if ($lamp->status == 1) text-success @else text-danger @endif"
+                                            id="lampStatus-2">
+                                            ON </span>
+                                    </h4>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-body-tertiary justify-content-center border-0 shadow-sm rounded-2 d-none"
+                        id="loader-2">
+                        <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+                        </div>
+                        <div class="mt-2">
+                            <strong>Mohon Tunggu...</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm rounded-2">
+                    <div class="card-header bg-danger text-white" id="headerlamp-1">
+                        <h5 class="mb-0 text-uppercase">Lampu Teras</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <img src="off.png" class="mt-3" width="80" id="lamp-1">
+                        <div class="mt-4">
+                            <div class="form-check form-switch">
+                                <input onclick="updateLamp(this)" class="form-check-input status-1" type="checkbox"
+                                    role="switch" id="1" bg-danger>
+                                <label class="form-check-label ms-3 mt-1" for="1">
+                                    <h4>
+                                        <span class="@if ($lamp->status == 1) text-success @else text-danger @endif"
+                                            id="lampStatus-1">
+                                            OFF </span>
+                                    </h4>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-body-tertiary justify-content-center border-0 shadow-sm rounded-2 d-none"
+                        id="loader-1">
+                        <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+                        </div>
+                        <div class="mt-2">
+                            <strong>Mohon Tunggu...</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalSetApi" tabindex="-1" aria-labelledby="modalSetApiLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Set API</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="mb-2">
+                <label for="set_api">Url API</label>
+                <input placeholder="http://192.168.1.243" type="text" name="set_api" id="set_api" class="form-control">
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="save_api" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        function updateLamp(payload) {
+
+            var set_api = getCookie('set_api');
+            if (set_api) {
+                //define token
+                let token = $("meta[name='csrf-token']").attr("content");
+
+                //show loading
+                $(`#loader-${payload.id}`).removeClass('d-none');
+                $.ajax({
+                    // type: "POST",
+                    type: "GET",
+                    dataType: 'json', // json
+                    url: set_api+`/api/lamps/${payload.id}`,
+                    data: {
+                        // "_token": token,
+                        // "csrf_test_name": token,
+                    },
+                    success: function (response) {
+
+                        setTimeout(function () {
+                            console.log(response.data.status);
+
+                            //show success message
+                            toastr.success(response.message, 'BERHASIL!');
+                            var id = response.data.id;
+
+                            if (response.data.status == 1) {
+                                // $(`#lamp-${response.data.id}`).attr('src', `images/on.png`);
+                                $(`#lamp-` + id).attr('src',
+                                    `on.png`);
+                                $(`#headerlamp-` + id).removeClass('bg-danger').addClass(
+                                    'bg-success');
+                                $(`#lampStatus-` + id).text('ON').addClass('text-success')
+                                    .removeClass('text-danger');
+                                $(`.status-` + id).val(0);
+                            } else {
+                                $(`#lamp-` + id).attr('src',
+                                    `off.png`);
+                                $(`#headerlamp-` + id).removeClass('bg-success').addClass(
+                                    'bg-danger');
+                                $(`#lampStatus-` + id).text('OFF').addClass('text-danger')
+                                    .removeClass('text-success');
+                                $(`.status-` + id).val(1);
+                            }
+
+                            //hide loading
+                            $(`#loader-${payload.id}`).addClass('d-none');
+
+                        }, 1000);
+                    },
+                    error: function () {
+                        alert('Internal Server Error');
+                    }
+                });
+            }
+        }
+
+
+
+        function statusLamp() {
+            var set_api = getCookie('set_api');
+            if (set_api) {
+                
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json', // json
+                    url: set_api+`/api/lamps`,
+                    data: {
+                        // "_token": token,
+                        // "csrf_test_name": token,
+                    },
+                    success: function (response) {
+    
+                        for (let index = 0; index < response.data.length - 5; index++) {
+                            const element = response.data[index];
+    
+                            var id = element.id;
+    
+                            if (element.status == 1) {
+                                // $(`#lamp-${response.data.id}`).attr('src', `images/on.png`);
+                                $(`#lamp-` + id).attr('src',
+                                    `on.png`);
+                                $(`#headerlamp-` + id).removeClass('bg-danger').addClass(
+                                    'bg-success');
+                                $(`#lampStatus-` + id).text('ON').addClass('text-success')
+                                    .removeClass('text-danger');
+                                $(`.status-` + id).val(0);
+                                $(`.status-` + id).attr('checked', "true");
+                                
+                            } else {
+                                $(`#lamp-` + id).attr('src',
+                                    `off.png`);
+                                $(`#headerlamp-` + id).removeClass('bg-success').addClass(
+                                    'bg-danger');
+                                $(`#lampStatus-` + id).text('OFF').addClass('text-danger')
+                                    .removeClass('text-success');
+                                $(`.status-` + id).val(1);
+                                $(`.status-` + id).attr('checked');
+                                $(`.status-` + id).removeAttr('checked');
+                            }
+    
+                            //hide loading
+                            $(`#loader-${id}`).addClass('d-none');
+                        }
+    
+                    },
+                    error: function () {
+                        // alert('Internal Server Error');
+                    }
+                });
+            }
+        }
+
+        statusLamp();
+        setInterval(statusLamp, 2000);
+
+        const modalSetApi = new bootstrap.Modal('#modalSetApi', {
+            keyboard: false
+        })
+
+        $('#save_api').on('click', function(){
+            var set_api = $('#set_api').val();
+            setCookie('set_api', set_api, 7);
+            modalSetApi.hide();
+        })
+
+        $('#show_api').on('click', function(){
+            var set_api = getCookie('set_api');
+            $('#set_api').val(set_api);
+            modalSetApi.show();
+        })
+
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+    </script>
+
+    <footer class="footer mt-auto py-3 bg-light fixed-bottom">
+        <div class="container text-center">
+            <span class="text-muted">Smart Home System. All Rights Reserved</span>
+        </div>
+    </footer>
+
+    
+</body>
+
+</html>
